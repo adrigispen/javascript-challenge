@@ -25,7 +25,7 @@ describe("The Assessment", () => {
   });
   describe("when completed", () => {
     let q;
-    while (a.currentQuestion < 29) {
+    while (a.currentQuestion < a.questions.length - 1) {
       q = a.getNextQuestion();
       a.saveAnswer(q, 0);
     }
