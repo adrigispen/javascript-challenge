@@ -3,7 +3,7 @@ import Dimensions from "./dimensions";
 class Assessment {
   constructor() {
     this.questions = this.createQuestions();
-    this.currentQuestion = -1;
+    this.currentQuestion = 0;
     this.result = {};
   }
 
@@ -38,7 +38,8 @@ class Assessment {
   }
 
   getNextQuestion() {
-    return this.questions[++this.currentQuestion];
+    if (this.currentQuestion > this.questions.length) return null;
+    return this.questions[this.currentQuestion++];
   }
 
   saveAnswer(question, answerIndex) {

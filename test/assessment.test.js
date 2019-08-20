@@ -2,7 +2,8 @@ import Assessment from "../src/assessment";
 
 // Feel free to rewrite this test suite. This is provided as guidance.
 describe("The Assessment", () => {
-  let a = new Assessment();
+  let a;
+  beforeEach(() => (a = new Assessment()));
   it("should have 30 questions", () => {
     expect(a.questions).toHaveLength(30);
   });
@@ -24,11 +25,15 @@ describe("The Assessment", () => {
     expect(a.questions.filter(el => el.answers.length !== 2)).toHaveLength(0);
   });
   describe("when completed", () => {
-    let q;
-    while (a.currentQuestion < a.questions.length - 1) {
-      q = a.getNextQuestion();
-      a.saveAnswer(q, 0);
-    }
+    let a;
+    beforeEach(() => {
+      a = new Assessment();
+      let q = a.getNextQuestion();
+      while (q) {
+        a.saveAnswer(q, 0); // Choose the first answer in the answers array
+        q = a.getNextQuestion();
+      }
+    });
     it("should provide the results as an object", () => {
       expect(a.result).toBeInstanceOf(Object);
     });
